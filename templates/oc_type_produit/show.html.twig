@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcTypeProduit{% endblock %}
+
+{% block body %}
+    <h1>OcTypeProduit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ oc_type_produit.id }}</td>
+            </tr>
+            <tr>
+                <th>CodeType</th>
+                <td>{{ oc_type_produit.codeType }}</td>
+            </tr>
+            <tr>
+                <th>TypeName</th>
+                <td>{{ oc_type_produit.typeName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_oc_type_produit_index') }}">back to list</a>
+
+    <a href="{{ path('app_oc_type_produit_edit', {'id': oc_type_produit.id}) }}">edit</a>
+
+    {{ include('oc_type_produit/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit OcExamens{% endblock %}
+
+{% block body %}
+    <h1>Edit OcExamens</h1>
+
+    {{ include('oc_examens/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_oc_examens_index') }}">back to list</a>
+
+    {{ include('oc_examens/_delete_form.html.twig') }}
+{% endblock %}

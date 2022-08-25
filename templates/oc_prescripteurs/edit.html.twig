@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit OcPrescripteurs{% endblock %}
+
+{% block body %}
+    <h1>Edit OcPrescripteurs</h1>
+
+    {{ include('oc_prescripteurs/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_oc_prescripteurs_index') }}">back to list</a>
+
+    {{ include('oc_prescripteurs/_delete_form.html.twig') }}
+{% endblock %}

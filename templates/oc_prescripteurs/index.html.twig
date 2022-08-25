@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcPrescripteurs index
+{% endblock %}
+
+{% block body %}
+	<h1>OcPrescripteurs index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>CodePrescripteur</th>
+				<th>NomPrescripteur</th>
+				<th>PrenomPrescripteur</th>
+				<th>Genre</th>
+				<th>DateNaissPrescripteur</th>
+				<th>NumTelPrescripteur</th>
+				<th>PhotoPrescriteur</th>
+				<th>DateEmbauche</th>
+				<th>Fonction</th>
+
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for oc_prescripteur in oc_prescripteurs %}
+				<tr>
+					<td>{{ oc_prescripteur.id }}</td>
+					<td>{{ oc_prescripteur.codePrescripteur }}</td>
+					<td>{{ oc_prescripteur.nomPrescripteur }}</td>
+					<td>{{ oc_prescripteur.prenomPrescripteur }}</td>
+					<td>{{ oc_prescripteur.genre }}</td>
+					<td>{{ oc_prescripteur.dateNaissPrescripteur ? oc_prescripteur.dateNaissPrescripteur|date('Y-m-d') : '' }}</td>
+					<td>{{ oc_prescripteur.numTelPrescripteur }}</td>
+					<td>{{ oc_prescripteur.photoPrescriteur }}</td>
+					<td>{{ oc_prescripteur.dateEmbauche ? oc_prescripteur.dateEmbauche|date('Y-m-d') : '' }}</td>
+					<td>{{ oc_prescripteur.fonctionPrescription.libelleFonction }}</td>
+					<td>
+						<a href="{{ path('app_oc_prescripteurs_show', {'id': oc_prescripteur.id}) }}">show</a>
+						<a href="{{ path('app_oc_prescripteurs_edit', {'id': oc_prescripteur.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="10">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_oc_prescripteurs_new') }}">Create new</a>
+{% endblock %}

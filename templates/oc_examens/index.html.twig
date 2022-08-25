@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcExamens index{% endblock %}
+
+{% block body %}
+    <h1>OcExamens index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>RefExamen</th>
+                <th>Designation</th>
+                <th>CodeExamen</th>
+                <th>PrixExamen</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for oc_examen in oc_examens %}
+            <tr>
+                <td>{{ oc_examen.id }}</td>
+                <td>{{ oc_examen.refExamen }}</td>
+                <td>{{ oc_examen.designation }}</td>
+                <td>{{ oc_examen.codeExamen }}</td>
+                <td>{{ oc_examen.prixExamen }}</td>
+                <td>
+                    <a href="{{ path('app_oc_examens_show', {'id': oc_examen.id}) }}">show</a>
+                    <a href="{{ path('app_oc_examens_edit', {'id': oc_examen.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_oc_examens_new') }}">Create new</a>
+{% endblock %}
