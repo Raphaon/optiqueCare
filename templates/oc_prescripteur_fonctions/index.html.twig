@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcPrescripteurFonctions index{% endblock %}
+
+{% block body %}
+    <h1>OcPrescripteurFonctions index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CodeFonction</th>
+                <th>LibelleFonction</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for oc_prescripteur_fonction in oc_prescripteur_fonctions %}
+            <tr>
+                <td>{{ oc_prescripteur_fonction.id }}</td>
+                <td>{{ oc_prescripteur_fonction.codeFonction }}</td>
+                <td>{{ oc_prescripteur_fonction.libelleFonction }}</td>
+                <td>
+                    <a href="{{ path('app_oc_prescripteur_fonctions_show', {'id': oc_prescripteur_fonction.id}) }}">show</a>
+                    <a href="{{ path('app_oc_prescripteur_fonctions_edit', {'id': oc_prescripteur_fonction.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_oc_prescripteur_fonctions_new') }}">Create new</a>
+{% endblock %}

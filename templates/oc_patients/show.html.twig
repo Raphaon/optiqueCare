@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcPatients{% endblock %}
+
+{% block body %}
+    <h1>OcPatients</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ oc_patient.id }}</td>
+            </tr>
+            <tr>
+                <th>Matricule</th>
+                <td>{{ oc_patient.matricule }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ oc_patient.name }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ oc_patient.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ oc_patient.gender }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{{ oc_patient.birthday ? oc_patient.birthday|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ oc_patient.phone }}</td>
+            </tr>
+            <tr>
+                <th>Profession</th>
+                <td>{{ oc_patient.profession }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ oc_patient.email }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ oc_patient.location }}</td>
+            </tr>
+            <tr>
+                <th>Hobbies</th>
+                <td>{{ oc_patient.hobbies }}</td>
+            </tr>
+            <tr>
+                <th>Picture</th>
+                <td>{{ oc_patient.picture }}</td>
+            </tr>
+            <tr>
+                <th>Ice_name</th>
+                <td>{{ oc_patient.iceName }}</td>
+            </tr>
+            <tr>
+                <th>Ice_phone</th>
+                <td>{{ oc_patient.icePhone }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_oc_patients_index') }}">back to list</a>
+
+    <a href="{{ path('app_oc_patients_edit', {'id': oc_patient.id}) }}">edit</a>
+
+    {{ include('oc_patients/_delete_form.html.twig') }}
+{% endblock %}

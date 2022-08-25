@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcPatients index{% endblock %}
+
+{% block body %}
+    <h1>OcPatients index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Matricule</th>
+                <th>Name</th>
+                <th>LastName</th>
+                <th>Gender</th>
+                <th>Birthday</th>
+                <th>Phone</th>
+                <th>Profession</th>
+                <th>Email</th>
+                <th>Location</th>
+                <th>Hobbies</th>
+                <th>Picture</th>
+                <th>Ice_name</th>
+                <th>Ice_phone</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for oc_patient in oc_patients %}
+            <tr>
+                <td>{{ oc_patient.id }}</td>
+                <td>{{ oc_patient.matricule }}</td>
+                <td>{{ oc_patient.name }}</td>
+                <td>{{ oc_patient.lastName }}</td>
+                <td>{{ oc_patient.gender }}</td>
+                <td>{{ oc_patient.birthday ? oc_patient.birthday|date('Y-m-d') : '' }}</td>
+                <td>{{ oc_patient.phone }}</td>
+                <td>{{ oc_patient.profession }}</td>
+                <td>{{ oc_patient.email }}</td>
+                <td>{{ oc_patient.location }}</td>
+                <td>{{ oc_patient.hobbies }}</td>
+                <td>{{ oc_patient.picture }}</td>
+                <td>{{ oc_patient.iceName }}</td>
+                <td>{{ oc_patient.icePhone }}</td>
+                <td>
+                    <a href="{{ path('app_oc_patients_show', {'id': oc_patient.id}) }}">show</a>
+                    <a href="{{ path('app_oc_patients_edit', {'id': oc_patient.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="15">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_oc_patients_new') }}">Create new</a>
+{% endblock %}
