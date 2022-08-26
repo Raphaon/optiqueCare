@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit OcProduits{% endblock %}
+
+{% block body %}
+    <h1>Edit OcProduits</h1>
+
+    {{ include('oc_produits/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_oc_produits_index') }}">back to list</a>
+
+    {{ include('oc_produits/_delete_form.html.twig') }}
+{% endblock %}

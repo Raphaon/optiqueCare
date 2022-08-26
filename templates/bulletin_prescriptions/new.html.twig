@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New BulletinPrescriptions{% endblock %}
+
+{% block body %}
+    <h1>Create new BulletinPrescriptions</h1>
+
+    {{ include('bulletin_prescriptions/_form.html.twig') }}
+
+    <a href="{{ path('app_bulletin_prescriptions_index') }}">back to list</a>
+{% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OcPatientsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -81,6 +83,22 @@ class OcPatients
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $ice_phone;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OcPatientParameters::class, mappedBy="patient")
+     */
+    private $parameters;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OcConsultation::class, mappedBy="patient")
+     */
+    private $consultations;
+
+    public function __construct()
+    {
+        $this->parameters = new ArrayCollection();
+        $this->consultations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -239,6 +257,66 @@ class OcPatients
     public function setIcePhone(?string $ice_phone): self
     {
         $this->ice_phone = $ice_phone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OcPatientParameters>
+     */
+    public function getParameters(): Collection
+    {
+        return $this->parameters;
+    }
+
+    public function addParameter(OcPatientParameters $parameter): self
+    {
+        if (!$this->parameters->contains($parameter)) {
+            $this->parameters[] = $parameter;
+            $parameter->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParameter(OcPatientParameters $parameter): self
+    {
+        if ($this->parameters->removeElement($parameter)) {
+            // set the owning side to null (unless already changed)
+            if ($parameter->getPatient() === $this) {
+                $parameter->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OcConsultation>
+     */
+    public function getConsultations(): Collection
+    {
+        return $this->consultations;
+    }
+
+    public function addConsultation(OcConsultation $consultation): self
+    {
+        if (!$this->consultations->contains($consultation)) {
+            $this->consultations[] = $consultation;
+            $consultation->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConsultation(OcConsultation $consultation): self
+    {
+        if ($this->consultations->removeElement($consultation)) {
+            // set the owning side to null (unless already changed)
+            if ($consultation->getPatient() === $this) {
+                $consultation->setPatient(null);
+            }
+        }
 
         return $this;
     }

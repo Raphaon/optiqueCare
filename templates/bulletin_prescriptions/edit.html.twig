@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit BulletinPrescriptions{% endblock %}
+
+{% block body %}
+    <h1>Edit BulletinPrescriptions</h1>
+
+    {{ include('bulletin_prescriptions/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_bulletin_prescriptions_index') }}">back to list</a>
+
+    {{ include('bulletin_prescriptions/_delete_form.html.twig') }}
+{% endblock %}

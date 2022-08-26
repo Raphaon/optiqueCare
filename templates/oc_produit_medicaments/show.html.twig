@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcProduitMedicaments{% endblock %}
+
+{% block body %}
+    <h1>OcProduitMedicaments</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ oc_produit_medicament.id }}</td>
+            </tr>
+            <tr>
+                <th>RefMedoc</th>
+                <td>{{ oc_produit_medicament.refMedoc }}</td>
+            </tr>
+            <tr>
+                <th>DateExp</th>
+                <td>{{ oc_produit_medicament.dateExp ? oc_produit_medicament.dateExp|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NumLot</th>
+                <td>{{ oc_produit_medicament.numLot }}</td>
+            </tr>
+            <tr>
+                <th>DateAchat</th>
+                <td>{{ oc_produit_medicament.dateAchat ? oc_produit_medicament.dateAchat|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_oc_produit_medicaments_index') }}">back to list</a>
+
+    <a href="{{ path('app_oc_produit_medicaments_edit', {'id': oc_produit_medicament.id}) }}">edit</a>
+
+    {{ include('oc_produit_medicaments/_delete_form.html.twig') }}
+{% endblock %}

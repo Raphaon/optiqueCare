@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OcExamensRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class OcExamens
      * @ORM\Column(type="float", nullable=true)
      */
     private $prixExamen;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=BulletinExamens::class, mappedBy="examen")
+     */
+    private $bulletinExamens;
+
+    public function __construct()
+    {
+        $this->bulletinExamens = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,33 @@ class OcExamens
     public function setPrixExamen(?float $prixExamen): self
     {
         $this->prixExamen = $prixExamen;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BulletinExamens>
+     */
+    public function getBulletinExamens(): Collection
+    {
+        return $this->bulletinExamens;
+    }
+
+    public function addBulletinExamen(BulletinExamens $bulletinExamen): self
+    {
+        if (!$this->bulletinExamens->contains($bulletinExamen)) {
+            $this->bulletinExamens[] = $bulletinExamen;
+            $bulletinExamen->addExaman($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBulletinExamen(BulletinExamens $bulletinExamen): self
+    {
+        if ($this->bulletinExamens->removeElement($bulletinExamen)) {
+            $bulletinExamen->removeExaman($this);
+        }
 
         return $this;
     }

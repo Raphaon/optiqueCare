@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcProduitLunettes{% endblock %}
+
+{% block body %}
+    <h1>OcProduitLunettes</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ oc_produit_lunette.id }}</td>
+            </tr>
+            <tr>
+                <th>ModeleVerre</th>
+                <td>{{ oc_produit_lunette.modeleVerre }}</td>
+            </tr>
+            <tr>
+                <th>GrandeurVerre</th>
+                <td>{{ oc_produit_lunette.grandeurVerre }}</td>
+            </tr>
+            <tr>
+                <th>SphereR</th>
+                <td>{{ oc_produit_lunette.sphereR }}</td>
+            </tr>
+            <tr>
+                <th>CylindreR</th>
+                <td>{{ oc_produit_lunette.cylindreR }}</td>
+            </tr>
+            <tr>
+                <th>AxeR</th>
+                <td>{{ oc_produit_lunette.axeR }}</td>
+            </tr>
+            <tr>
+                <th>AddR</th>
+                <td>{{ oc_produit_lunette.addR }}</td>
+            </tr>
+            <tr>
+                <th>PdR</th>
+                <td>{{ oc_produit_lunette.pdR }}</td>
+            </tr>
+            <tr>
+                <th>VisusR</th>
+                <td>{{ oc_produit_lunette.visusR }}</td>
+            </tr>
+            <tr>
+                <th>SphereL</th>
+                <td>{{ oc_produit_lunette.sphereL }}</td>
+            </tr>
+            <tr>
+                <th>CylindreL</th>
+                <td>{{ oc_produit_lunette.cylindreL }}</td>
+            </tr>
+            <tr>
+                <th>AxeL</th>
+                <td>{{ oc_produit_lunette.axeL }}</td>
+            </tr>
+            <tr>
+                <th>AddL</th>
+                <td>{{ oc_produit_lunette.addL }}</td>
+            </tr>
+            <tr>
+                <th>PdL</th>
+                <td>{{ oc_produit_lunette.pdL }}</td>
+            </tr>
+            <tr>
+                <th>GrandeurL</th>
+                <td>{{ oc_produit_lunette.grandeurL }}</td>
+            </tr>
+            <tr>
+                <th>VisusL</th>
+                <td>{{ oc_produit_lunette.visusL }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_oc_produit_lunettes_index') }}">back to list</a>
+
+    <a href="{{ path('app_oc_produit_lunettes_edit', {'id': oc_produit_lunette.id}) }}">edit</a>
+
+    {{ include('oc_produit_lunettes/_delete_form.html.twig') }}
+{% endblock %}

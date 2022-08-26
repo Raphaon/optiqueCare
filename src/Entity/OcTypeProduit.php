@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OcTypeProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class OcTypeProduit
      * @ORM\Column(type="string", length=100)
      */
     private $typeName;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OcProduits::class, mappedBy="typeProd")
+     */
+    private $produits;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,6 +64,36 @@ class OcTypeProduit
     public function setTypeName(string $typeName): self
     {
         $this->typeName = $typeName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OcProduits>
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(OcProduits $produit): self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->setTypeProd($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(OcProduits $produit): self
+    {
+        if ($this->produits->removeElement($produit)) {
+            // set the owning side to null (unless already changed)
+            if ($produit->getTypeProd() === $this) {
+                $produit->setTypeProd(null);
+            }
+        }
 
         return $this;
     }
