@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220825195300 extends AbstractMigration
+final class Version20220909104006 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -29,6 +29,8 @@ final class Version20220825195300 extends AbstractMigration
         $this->addSql('CREATE TABLE oc_produit_lunettes (id INT AUTO_INCREMENT NOT NULL, ref_produit_id INT DEFAULT NULL, modele_verre VARCHAR(100) DEFAULT NULL, grandeur_verre VARCHAR(5) DEFAULT NULL, sphere_r DOUBLE PRECISION DEFAULT NULL, cylindre_r DOUBLE PRECISION DEFAULT NULL, axe_r DOUBLE PRECISION DEFAULT NULL, add_r DOUBLE PRECISION DEFAULT NULL, pd_r DOUBLE PRECISION DEFAULT NULL, visus_r VARCHAR(10) DEFAULT NULL, sphere_l DOUBLE PRECISION DEFAULT NULL, cylindre_l DOUBLE PRECISION DEFAULT NULL, axe_l DOUBLE PRECISION DEFAULT NULL, add_l DOUBLE PRECISION DEFAULT NULL, pd_l DOUBLE PRECISION DEFAULT NULL, grandeur_l DOUBLE PRECISION DEFAULT NULL, visus_l VARCHAR(10) DEFAULT NULL, UNIQUE INDEX UNIQ_EF5E2D909F191E5 (ref_produit_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE oc_produit_medicaments (id INT AUTO_INCREMENT NOT NULL, ref_produit_id INT DEFAULT NULL, ref_medoc VARCHAR(50) NOT NULL, date_exp DATE NOT NULL, num_lot VARCHAR(50) NOT NULL, date_achat DATE NOT NULL, UNIQUE INDEX UNIQ_FE7C8E5C9F191E5 (ref_produit_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE oc_produits (id INT AUTO_INCREMENT NOT NULL, type_prod_id INT DEFAULT NULL, ref_prod VARCHAR(50) NOT NULL, libelle_prod VARCHAR(255) NOT NULL, prix_achat DOUBLE PRECISION DEFAULT NULL, prix_vente DOUBLE PRECISION DEFAULT NULL, marque_prod VARCHAR(255) DEFAULT NULL, description_prod LONGTEXT DEFAULT NULL, couleurs_prod VARCHAR(30) DEFAULT NULL, INDEX IDX_E49FE22329E95080 (type_prod_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE oc_type_produit (id INT AUTO_INCREMENT NOT NULL, code_type VARCHAR(50) NOT NULL, type_name VARCHAR(100) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE messenger_messages (id BIGINT AUTO_INCREMENT NOT NULL, body LONGTEXT NOT NULL, headers LONGTEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL, available_at DATETIME NOT NULL, delivered_at DATETIME DEFAULT NULL, INDEX IDX_75EA56E0FB7336F0 (queue_name), INDEX IDX_75EA56E0E3BD61CE (available_at), INDEX IDX_75EA56E016BA31DB (delivered_at), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE bulletin_examens ADD CONSTRAINT FK_B130A61162FF6CDF FOREIGN KEY (consultation_id) REFERENCES oc_consultation (id)');
         $this->addSql('ALTER TABLE bulletin_examens_oc_examens ADD CONSTRAINT FK_99191E27A5212705 FOREIGN KEY (bulletin_examens_id) REFERENCES bulletin_examens (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE bulletin_examens_oc_examens ADD CONSTRAINT FK_99191E278659B99F FOREIGN KEY (oc_examens_id) REFERENCES oc_examens (id) ON DELETE CASCADE');
@@ -46,15 +48,11 @@ final class Version20220825195300 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE bulletin_examens DROP FOREIGN KEY FK_B130A61162FF6CDF');
         $this->addSql('ALTER TABLE bulletin_examens_oc_examens DROP FOREIGN KEY FK_99191E27A5212705');
-        $this->addSql('ALTER TABLE bulletin_examens_oc_examens DROP FOREIGN KEY FK_99191E278659B99F');
-        $this->addSql('ALTER TABLE bulletin_prescriptions DROP FOREIGN KEY FK_D33ECEC762FF6CDF');
         $this->addSql('ALTER TABLE bulletin_prescriptions_oc_produits DROP FOREIGN KEY FK_3671A94366B9A24D');
+        $this->addSql('ALTER TABLE bulletin_examens DROP FOREIGN KEY FK_B130A61162FF6CDF');
+        $this->addSql('ALTER TABLE bulletin_prescriptions DROP FOREIGN KEY FK_D33ECEC762FF6CDF');
         $this->addSql('ALTER TABLE bulletin_prescriptions_oc_produits DROP FOREIGN KEY FK_3671A94350B222D6');
-        $this->addSql('ALTER TABLE oc_consultation DROP FOREIGN KEY FK_F2B08EE66B899279');
-        $this->addSql('ALTER TABLE oc_consultation DROP FOREIGN KEY FK_F2B08EE6D486E642');
-        $this->addSql('ALTER TABLE oc_patient_parameters DROP FOREIGN KEY FK_2408FFEB6B899279');
         $this->addSql('ALTER TABLE oc_produit_lunettes DROP FOREIGN KEY FK_EF5E2D909F191E5');
         $this->addSql('ALTER TABLE oc_produit_medicaments DROP FOREIGN KEY FK_FE7C8E5C9F191E5');
         $this->addSql('ALTER TABLE oc_produits DROP FOREIGN KEY FK_E49FE22329E95080');
@@ -67,5 +65,7 @@ final class Version20220825195300 extends AbstractMigration
         $this->addSql('DROP TABLE oc_produit_lunettes');
         $this->addSql('DROP TABLE oc_produit_medicaments');
         $this->addSql('DROP TABLE oc_produits');
+        $this->addSql('DROP TABLE oc_type_produit');
+        $this->addSql('DROP TABLE messenger_messages');
     }
 }
