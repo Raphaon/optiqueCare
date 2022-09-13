@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcProduitLunettes index{% endblock %}
+
+{% block body %}
+    <h1>OcProduitLunettes index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ModeleVerre</th>
+                <th>GrandeurVerre</th>
+                <th>SphereR</th>
+                <th>CylindreR</th>
+                <th>AxeR</th>
+                <th>AddR</th>
+                <th>PdR</th>
+                <th>VisusR</th>
+                <th>SphereL</th>
+                <th>CylindreL</th>
+                <th>AxeL</th>
+                <th>AddL</th>
+                <th>PdL</th>
+                <th>GrandeurL</th>
+                <th>VisusL</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for oc_produit_lunette in oc_produit_lunettes %}
+            <tr>
+                <td>{{ oc_produit_lunette.id }}</td>
+                <td>{{ oc_produit_lunette.modeleVerre }}</td>
+                <td>{{ oc_produit_lunette.grandeurVerre }}</td>
+                <td>{{ oc_produit_lunette.sphereR }}</td>
+                <td>{{ oc_produit_lunette.cylindreR }}</td>
+                <td>{{ oc_produit_lunette.axeR }}</td>
+                <td>{{ oc_produit_lunette.addR }}</td>
+                <td>{{ oc_produit_lunette.pdR }}</td>
+                <td>{{ oc_produit_lunette.visusR }}</td>
+                <td>{{ oc_produit_lunette.sphereL }}</td>
+                <td>{{ oc_produit_lunette.cylindreL }}</td>
+                <td>{{ oc_produit_lunette.axeL }}</td>
+                <td>{{ oc_produit_lunette.addL }}</td>
+                <td>{{ oc_produit_lunette.pdL }}</td>
+                <td>{{ oc_produit_lunette.grandeurL }}</td>
+                <td>{{ oc_produit_lunette.visusL }}</td>
+                <td>
+                    <a href="{{ path('app_oc_produit_lunettes_show', {'id': oc_produit_lunette.id}) }}">show</a>
+                    <a href="{{ path('app_oc_produit_lunettes_edit', {'id': oc_produit_lunette.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="17">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_oc_produit_lunettes_new') }}">Create new</a>
+{% endblock %}

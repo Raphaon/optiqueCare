@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcConsultation{% endblock %}
+
+{% block body %}
+    <h1>OcConsultation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ oc_consultation.id }}</td>
+            </tr>
+            <tr>
+                <th>DateConsultation</th>
+                <td>{{ oc_consultation.dateConsultation ? oc_consultation.dateConsultation|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>HistoireMaladie</th>
+                <td>{{ oc_consultation.histoireMaladie }}</td>
+            </tr>
+            <tr>
+                <th>Plaintes</th>
+                <td>{{ oc_consultation.plaintes }}</td>
+            </tr>
+            <tr>
+                <th>AntecedantsPatient</th>
+                <td>{{ oc_consultation.antecedantsPatient }}</td>
+            </tr>
+            <tr>
+                <th>AntecedantsFamiliaux</th>
+                <td>{{ oc_consultation.antecedantsFamiliaux }}</td>
+            </tr>
+            <tr>
+                <th>DiagnosticPatient</th>
+                <td>{{ oc_consultation.diagnosticPatient }}</td>
+            </tr>
+            <tr>
+                <th>BilanConsultation</th>
+                <td>{{ oc_consultation.bilanConsultation }}</td>
+            </tr>
+            <tr>
+                <th>DateProchainRdv</th>
+                <td>{{ oc_consultation.dateProchainRdv ? oc_consultation.dateProchainRdv|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_oc_consultation_index') }}">back to list</a>
+
+    <a href="{{ path('app_oc_consultation_edit', {'id': oc_consultation.id}) }}">edit</a>
+
+    {{ include('oc_consultation/_delete_form.html.twig') }}
+{% endblock %}

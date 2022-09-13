@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OcProduits index{% endblock %}
+
+{% block body %}
+    <h1>OcProduits index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>RefProd</th>
+                <th>LibelleProd</th>
+                <th>PrixAchat</th>
+                <th>PrixVente</th>
+                <th>MarqueProd</th>
+                <th>DescriptionProd</th>
+                <th>CouleursProd</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for oc_produit in oc_produits %}
+            <tr>
+                <td>{{ oc_produit.id }}</td>
+                <td>{{ oc_produit.refProd }}</td>
+                <td>{{ oc_produit.libelleProd }}</td>
+                <td>{{ oc_produit.prixAchat }}</td>
+                <td>{{ oc_produit.prixVente }}</td>
+                <td>{{ oc_produit.marqueProd }}</td>
+                <td>{{ oc_produit.descriptionProd }}</td>
+                <td>{{ oc_produit.couleursProd }}</td>
+                <td>
+                    <a href="{{ path('app_oc_produits_show', {'id': oc_produit.id}) }}">show</a>
+                    <a href="{{ path('app_oc_produits_edit', {'id': oc_produit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_oc_produits_new') }}">Create new</a>
+{% endblock %}

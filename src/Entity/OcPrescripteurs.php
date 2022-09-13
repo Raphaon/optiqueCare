@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OcPrescripteursRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -62,6 +64,16 @@ class OcPrescripteurs
      * @ORM\JoinColumn(nullable=false)
      */
     private $fonctionPrescription;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OcConsultation::class, mappedBy="prescripteur")
+     */
+    private $consultations;
+
+    public function __construct()
+    {
+        $this->consultations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -172,6 +184,36 @@ class OcPrescripteurs
     public function setFonctionPrescription(?OcPrescripteurFonctions $fonctionPrescription): self
     {
         $this->fonctionPrescription = $fonctionPrescription;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OcConsultation>
+     */
+    public function getConsultations(): Collection
+    {
+        return $this->consultations;
+    }
+
+    public function addConsultation(OcConsultation $consultation): self
+    {
+        if (!$this->consultations->contains($consultation)) {
+            $this->consultations[] = $consultation;
+            $consultation->setPrescripteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConsultation(OcConsultation $consultation): self
+    {
+        if ($this->consultations->removeElement($consultation)) {
+            // set the owning side to null (unless already changed)
+            if ($consultation->getPrescripteur() === $this) {
+                $consultation->setPrescripteur(null);
+            }
+        }
 
         return $this;
     }
