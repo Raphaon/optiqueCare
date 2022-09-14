@@ -51,8 +51,14 @@
 											<td>{{ bulletin_examen.datePrescription ? bulletin_examen.datePrescription|date('d-m-Y') : '' }}</td>
 											<td>{{ bulletin_examen.observation }}</td>
 											<td>
-												<a href="{{ path('app_bulletin_examens_show', {'id': bulletin_examen.id}) }}">show</a>
-												<a href="{{ path('app_bulletin_examens_edit', {'id': bulletin_examen.id}) }}">edit</a>
+												<a class="btn btn-app bg-success" href="{{ path('app_bulletin_examens_show', {'id': bulletin_examen.id}) }}">
+													<a class="btn btn-app bg-success">
+														<i class="fas fa-view"></i>Show
+													</a>
+												</a>
+												<a class="btn btn-app" href="{{ path('app_bulletin_examens_edit', {'id': bulletin_examen.id}) }}">
+													<i class="fas fa-edit"></i>Edit
+												</a>
 											</td>
 										</tr>
 									{% else %}

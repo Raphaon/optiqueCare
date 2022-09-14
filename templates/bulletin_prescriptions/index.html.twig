@@ -1,37 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}BulletinPrescriptions index{% endblock %}
+{% block title %}
+	Prescriptions
+{% endblock %}
 
 {% block body %}
-    <h1>BulletinPrescriptions index</h1>
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Prescriptions</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">
+							<a href="{{ path('app_oc_dashboard') }}">Accueil</a>
+						</li>
+						<li class="breadcrumb-item active">Prescriptions</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!-- /.container-fluid -->
+	</section>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>DatePrescription</th>
-                <th>Posologie</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for bulletin_prescription in bulletin_prescriptions %}
-            <tr>
-                <td>{{ bulletin_prescription.id }}</td>
-                <td>{{ bulletin_prescription.datePrescription ? bulletin_prescription.datePrescription|date('Y-m-d') : '' }}</td>
-                <td>{{ bulletin_prescription.posologie }}</td>
-                <td>
-                    <a href="{{ path('app_bulletin_prescriptions_show', {'id': bulletin_prescription.id}) }}">show</a>
-                    <a href="{{ path('app_bulletin_prescriptions_edit', {'id': bulletin_prescription.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_bulletin_prescriptions_new') }}">Create new</a>
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">Ordonances</h3>
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Date</th>
+										<th>Posologie</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for bulletin_prescription in bulletin_prescriptions %}
+										<tr>
+											<td>{{ bulletin_prescription.datePrescription ? bulletin_prescription.datePrescription|date('Y-m-d') : '' }}</td>
+											<td>{{ bulletin_prescription.posologie }}</td>
+											<td>
+												<a class="btn btn-app bg-success" href="{{ path('app_bulletin_prescriptions_show', {'id': bulletin_prescription.id}) }}">
+													<i class="fas fa-view"></i>Show
+												</a>
+												<a class="btn btn-app" href="{{ path('app_bulletin_prescriptions_edit', {'id': bulletin_prescription.id}) }}">
+													<i class="fas fa-edit"></i>Edit
+												</a>
+											</td>
+										</tr>
+									{% else %}
+										<tr>
+											<td colspan="3">Aucun éléments trouvés</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Date de prescrition</th>
+										<th>Posologie</th>
+										<th>Actions</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<a href="{{ path('app_bulletin_prescriptions_new') }}">Create new</a>
+		<!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
 {% endblock %}
