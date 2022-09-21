@@ -79,6 +79,11 @@ class OcConsultation
      */
     private $bulletinExamens;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $refConsultation;
+
     public function __construct()
     {
         $this->bulletinPrescriptions = new ArrayCollection();
@@ -266,6 +271,18 @@ class OcConsultation
                 $bulletinExamen->setConsultation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRefConsultation(): ?string
+    {
+        return $this->refConsultation;
+    }
+
+    public function setRefConsultation(string $refConsultation): self
+    {
+        $this->refConsultation = $refConsultation;
 
         return $this;
     }

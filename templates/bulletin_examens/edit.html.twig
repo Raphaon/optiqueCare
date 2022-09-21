@@ -1,13 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit BulletinExamens{% endblock %}
+{% block title %}Bulletin d'examen{% endblock %}
 
 {% block body %}
-    <h1>Edit BulletinExamens</h1>
+    <!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Bulletin d'Examens</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">
+							<a href="{{ path('app_oc_dashboard') }}">Accueil</a>
+						</li>
+                        <li class="breadcrumb-item">
+							<a href="{{ path('app_bulletin_examens_index') }}">Bulletin d'examens</a>
+						</li>
+						<li class="breadcrumb-item active">Modifier</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!-- /.container-fluid -->
+	</section>
 
-    {{ include('bulletin_examens/_form.html.twig', {'button_label': 'Update'}) }}
+    <!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-primary">
+						<div class="card-header">
+							<h3 class="card-title">Modifier Bulletins d'examens</h3>
+						</div>
 
-    <a href="{{ path('app_bulletin_examens_index') }}">back to list</a>
+						<!-- Corps du card -->
+						{{ include('bulletin_examens/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
 
-    {{ include('bulletin_examens/_delete_form.html.twig') }}
+                            {{ include('bulletin_examens/_delete_form.html.twig') }}
+                            <a type="button" class="btn btn-default" href="{{ path('app_bulletin_examens_index') }}">
+                                <i class="fas fa-arrow-left"></i> Retour
+                            </a>
+                        </div>
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->      
 {% endblock %}
