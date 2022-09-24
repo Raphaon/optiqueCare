@@ -1,30 +1,104 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}BulletinPrescriptions{% endblock %}
+{% block title %}
+	Ordonances
+{% endblock %}
 
 {% block body %}
-    <h1>BulletinPrescriptions</h1>
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Ordonances</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">
+							<a href="{{ path('app_oc_dashboard') }}">Accueil</a>
+						</li>
+						<li class="breadcrumb-item">
+							<a href="{{ path('app_bulletin_prescriptions_index') }}">Ordonances</a>
+						</li>
+						<li class="breadcrumb-item active">{{ bulletin_prescription.refPrescription }}</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!-- /.container-fluid -->
+	</section>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ bulletin_prescription.id }}</td>
-            </tr>
-            <tr>
-                <th>DatePrescription</th>
-                <td>{{ bulletin_prescription.datePrescription ? bulletin_prescription.datePrescription|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Posologie</th>
-                <td>{{ bulletin_prescription.posologie }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-primary">
+						<div class="card-header">
+							<h3 class="card-title">Ordonance N° :
+								{{ bulletin_prescription.refPrescription }}
+							</h3>
+						</div>
 
-    <a href="{{ path('app_bulletin_prescriptions_index') }}">back to list</a>
+						<div class="card-body">
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-3">
+										<label for="Date">Date :</label>
+										<input type="text" class="form-control" value="{{ bulletin_prescription.datePrescription ? bulletin_prescription.datePrescription|date('Y-m-d') : '' }}" disabled/>
+									</div>
+								</div>
+							</div>
 
-    <a href="{{ path('app_bulletin_prescriptions_edit', {'id': bulletin_prescription.id}) }}">edit</a>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-4">
+										<label for="reference">Ref Prescription :</label>
+										<input type="text" class="form-control" value="{{ bulletin_prescription.refPrescription }}" disabled/>
+									</div>
 
-    {{ include('bulletin_prescriptions/_delete_form.html.twig') }}
-{% endblock %}
+									<div class="col-md-4"></div>
+
+									<div class="col-md-4">
+										<label for="consultation">Consultation N° :</label>
+										<input type="text" class="form-control" value="{{ bulletin_prescription.consultation }}" disabled/>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-12">
+										<label>Produits</label>
+										<input type="text" class="form-control" value="{{ bulletin_prescription.produit }}" disabled/>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-12">
+										<label>Posologie :</label>
+										<input type="text" class="form-control" value="{{ bulletin_prescription.posologie }}" disabled/>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="card-footer">
+							<div class="float-right">
+								<a class="btn btn-infos" href="{{ path('app_bulletin_prescriptions_edit', {'id': bulletin_prescription.id}) }}">
+									<i class="fas fa-pencil"></i>
+									Modifier
+								</a>
+								{{ include('bulletin_prescriptions/_delete_form.html.twig') }}
+								<button type="button" class="btn btn-success">
+									<i class="fas fa-save"></i>
+									{{ button_label|default('Enregistrer') }}
+								</button>
+							</div>
+
+							<a href="{{ path('app_bulletin_prescriptions_index') }}">back to list</a>
+
+
+						{% endblock %}
