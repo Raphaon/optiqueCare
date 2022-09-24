@@ -1,4 +1,88 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="card-body">
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-3">
+				<label for="Date">Date :</label>
+				{{ form_widget(form.dateConsultation, {'attr': {'class': "form-control"}}) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-4">
+				<label for="reference">Patient :</label>
+				{{ form_widget(form.patient, {'attr': {'class': "form-control", 'placeholder':"Entrez la référence", 'id':"reference"}}) }}
+			</div>
+
+			<div class="col-md-4"></div>
+
+			<div class="col-md-4">
+				<label for="consultation">Prescripteur :</label>
+				{{ form_widget(form.prescripteur, {'attr': {'class': "form-control", 'id':"consultation"}}) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-6">
+				<label>Antécédants :</label>
+				{{ form_widget(form.antecedantsPatient, {'attr': {'class': "form-control", 'rows': "4"}}) }}
+			</div>
+            <div class="col-md-6">
+				<label>Plaintes :</label>
+				{{ form_widget(form.plaintes, {'attr': {'class': "form-control", 'rows': "4"}}) }}
+			</div>
+		</div>
+	</div>
+
+    <div class="form-group">
+		<div class="row">
+            <div class="col-md-6">
+				<label>Histoire de la maladie :</label>
+				{{ form_widget(form.histoireMaladie, {'attr': {'class': "form-control", 'rows': "4"}}) }}
+			</div>
+			<div class="col-md-6">
+				<label>Antécédants Familliaux :</label>
+				{{ form_widget(form.antecedantsFamiliaux, {'attr': {'class': "form-control", 'rows': "4"}}) }}
+			</div>
+		</div>
+	</div>
+
+    <div class="form-group">
+		<div class="row">
+			<div class="col-md-6">
+				<label>Diagnostique :</label>
+				{{ form_widget(form.diagnosticPatient, {'attr': {'class': "form-control", 'rows': "4"}}) }}
+			</div>
+            <div class="col-md-6">
+				<label>Bilan :</label>
+				{{ form_widget(form.bilanConsultation, {'attr': {'class': "form-control", 'rows': "4"}}) }}
+			</div>
+		</div>
+	</div>
+
+    <div class="form-group">
+		<div class="row">
+			<div class="col-md-6">
+			</div>
+            <div class="col-md-6">
+				<label>Date du RDV :</label>
+				{{ form_widget(form.dateProchainRdv, {'attr': {'class': "form-control", 'rows': "4"}}) }}
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div class="card-footer">
+	<div class="float-right">
+		<button type="button" class="btn btn-success">
+			<i class="fas fa-save"></i>
+			{{ button_label|default('Enregistrer') }}
+        </button>
+	</div>
+    
 {{ form_end(form) }}
