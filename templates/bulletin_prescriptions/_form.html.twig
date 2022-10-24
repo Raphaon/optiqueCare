@@ -1,4 +1,53 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="card-body">
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-3">
+				<label for="Date">Date :</label>
+				{{ form_widget(form.datePrescription, {'attr': {'class': "form-control"}}) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-4">
+				<label for="reference">Ref Prescription :</label>
+				{{ form_widget(form.refPrescription, {'attr': {'class': "form-control", 'placeholder':"Entrez la référence", 'id':"reference"}}) }}
+			</div>
+
+			<div class="col-md-4"></div>
+
+			<div class="col-md-4">
+				<label for="consultation">Consultation N° :</label>
+				{{ form_widget(form.consultation, {'attr': {'class': "form-control", 'id':"consultation"}}) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-12">
+				<label>Produits</label>
+				{{ form_widget(form.prdouit, {'attr': {'class': "duallistbox", 'multiple': "multiple"}}) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-12">
+				<label>Posologie :</label>
+				{{ form_widget(form.posologie, {'attr': {'class': "form-control", 'rows': "6", 'placeholder': "Entrez les observations ..." }}) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="card-footer">
+	<div class="float-right">
+		<button type="button" class="btn btn-success">
+			<i class="fas fa-save"></i>
+			{{ button_label|default('Enregistrer') }}</button>
+	</div>
+	{{ form_end(form) }}

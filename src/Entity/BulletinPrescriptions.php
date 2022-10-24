@@ -39,6 +39,11 @@ class BulletinPrescriptions
      */
     private $posologie;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $refPrescription;
+
     public function __construct()
     {
         $this->prdouit = new ArrayCollection();
@@ -105,6 +110,18 @@ class BulletinPrescriptions
     public function setPosologie(?string $posologie): self
     {
         $this->posologie = $posologie;
+
+        return $this;
+    }
+
+    public function getRefPrescription(): ?string
+    {
+        return $this->refPrescription;
+    }
+
+    public function setRefPrescription(string $refPrescription): self
+    {
+        $this->refPrescription = $refPrescription;
 
         return $this;
     }

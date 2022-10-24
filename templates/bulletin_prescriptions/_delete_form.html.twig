@@ -1,4 +1,7 @@
 <form method="post" action="{{ path('app_bulletin_prescriptions_delete', {'id': bulletin_prescription.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ bulletin_prescription.id) }}">
-    <button class="btn">Delete</button>
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ bulletin_prescription.id) }}">
+	<button class="btn btn-danger">
+		<i class="far fa-trash-alt"></i>
+		Supprimer
+	</button>
 </form>

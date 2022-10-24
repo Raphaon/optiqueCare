@@ -1,49 +1,106 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}OcConsultation index{% endblock %}
+{% block title %}
+	Consultations
+{% endblock %}
 
 {% block body %}
-    <h1>OcConsultation index</h1>
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Consultations</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">
+							<a href="{{ path('app_oc_dashboard') }}">Accueil</a>
+						</li>
+						<li class="breadcrumb-item active">Consultations</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!-- /.container-fluid -->
+	</section>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>DateConsultation</th>
-                <th>HistoireMaladie</th>
-                <th>Plaintes</th>
-                <th>AntecedantsPatient</th>
-                <th>AntecedantsFamiliaux</th>
-                <th>DiagnosticPatient</th>
-                <th>BilanConsultation</th>
-                <th>DateProchainRdv</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for oc_consultation in oc_consultations %}
-            <tr>
-                <td>{{ oc_consultation.id }}</td>
-                <td>{{ oc_consultation.dateConsultation ? oc_consultation.dateConsultation|date('Y-m-d') : '' }}</td>
-                <td>{{ oc_consultation.histoireMaladie }}</td>
-                <td>{{ oc_consultation.plaintes }}</td>
-                <td>{{ oc_consultation.antecedantsPatient }}</td>
-                <td>{{ oc_consultation.antecedantsFamiliaux }}</td>
-                <td>{{ oc_consultation.diagnosticPatient }}</td>
-                <td>{{ oc_consultation.bilanConsultation }}</td>
-                <td>{{ oc_consultation.dateProchainRdv ? oc_consultation.dateProchainRdv|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_oc_consultation_show', {'id': oc_consultation.id}) }}">show</a>
-                    <a href="{{ path('app_oc_consultation_edit', {'id': oc_consultation.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_oc_consultation_new') }}">Create new</a>
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">Bulletin d'ordonances</h3>
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Date</th>
+										<th>Histoire de la maladie</th>
+										<th>Plaintes</th>
+										<th>Antécédents patient</th>
+										<th>Antécédents familiaux</th>
+										<th>Diagnostic du patient</th>
+										<th>Bilan</th>
+										<th>Date du RDV</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for oc_consultation in oc_consultations %}
+										<tr>
+											<td>{{ oc_consultation.dateConsultation ? oc_consultation.dateConsultation|date('Y-m-d') : '' }}</td>
+											<td>{{ oc_consultation.histoireMaladie }}</td>
+											<td>{{ oc_consultation.plaintes }}</td>
+											<td>{{ oc_consultation.antecedantsPatient }}</td>
+											<td>{{ oc_consultation.antecedantsFamiliaux }}</td>
+											<td>{{ oc_consultation.diagnosticPatient }}</td>
+											<td>{{ oc_consultation.bilanConsultation }}</td>
+											<td>{{ oc_consultation.dateProchainRdv ? oc_consultation.dateProchainRdv|date('Y-m-d') : '' }}</td>
+											<td>
+												<a class="btn btn-app bg-success" href="{{ path('app_oc_consultation_show', {'id': oc_consultation.id}) }}">
+													<i class="fas fa-view"></i>Show
+												</a>
+												<a class="btn btn-app" href="{{ path('app_oc_consultation_edit', {'id': oc_consultation.id}) }}">
+													<i class="fas fa-edit"></i>Edit
+												</a>
+											</td>
+										</tr>
+									{% else %}
+										<tr>
+											<td colspan="9">Aucun éléments trouvés</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Date</th>
+										<th>Histoire de la maladie</th>
+										<th>Plaintes</th>
+										<th>Antécédents patient</th>
+										<th>Antécédents familiaux</th>
+										<th>Diagnostic du patient</th>
+										<th>Bilan</th>
+										<th>Date du RDV</th>
+										<th>Actions</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<a href="{{ path('app_oc_consultation_new') }}">Create new</a>
+		<!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
 {% endblock %}
